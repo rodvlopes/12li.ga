@@ -74,11 +74,11 @@ function isValidUrl(string) {
 //5 digits long hash code
 function hashCode(s) {
     return s.split("")
-        .reduce(function (a, b) { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0)
+        .reduce(function (a, b) { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0) // -> Number
         .toString()
-        .match(/(..?)/g)
+        .match(/(..?)/g) //--> pairs os char
         .reduce((a, c) => a + (parseInt(c) % 32).toString(32), '')
-        .replace(/-/, '')
+        .replace(/-/, '') // --> remove negative sign
 }
 
 function debounceFn(fn) {

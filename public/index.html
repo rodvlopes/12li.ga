@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12li.ga url shortner</title>
+    
+    <link rel="stylesheet" href="index.css">
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- production version, optimized for size and speed -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/slugify@1.4.6/slugify.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>
+            <i>12</i>li.ga<b v-if="link">/</b><span v-if="link">{{linkSlug}}</span>
+            <transition name="fade">
+                <a v-if="link && !linkError && !nameError" @click="handleSaveAndCopy">save & copy</a>
+            </transition>
+        </h1>
+        <form method="get">
+            <input v-model="link" type="text" class="link" name="link" placeholder="link address to be shortened">
+            <transition name="fade">
+                <div v-show="link && linkError" class="error">invalid url</div>
+            </transition>
+            <input v-model="linkName" v-if="link" type="text" @input="handleName" class="link" name="linkName" placeholder="custom name">
+            <transition name="fade">
+                <div v-show="link && linkName && nameError" class="error">name already registered, please select a different one</div>
+            </transition>
+        </form>
+    </div>
+    <input class="copy-stage" />
+    <footer>
+        <a href="https://github.com/rodvlopes"><img title="authored by rodvlopes" src="./github.svg" /></a>
+    </footer>
+    <script src="index.js"></script>
+</body>
+</html>

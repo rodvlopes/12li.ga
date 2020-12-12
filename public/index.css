@@ -1,0 +1,98 @@
+body {
+    margin: 1% 2%;
+    padding: 0;
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        margin: 5% 15%;
+        padding: 0;
+    }
+}
+
+h1, h1>* {
+    font-style: italic;
+}
+
+h1>i, h1>b {
+    color: deeppink;
+}
+
+h1>b {
+    margin-left: 10px;
+}
+
+h1>a {
+    font-size: 0.5em;
+    cursor: pointer;
+    padding: 0.5em;
+    border: 1px solid;
+    position: relative;
+    top: -5px;
+    border-radius: 20px;
+    left: 10px;
+}
+
+h1>a:hover {
+    color: deeppink;
+    border-color: deeppink;
+}
+
+h1>span {
+    color: grey;
+    font-size: 1em;
+    font-family: serif;
+    font-weight: bold;
+    outline-color: deeppink;
+    padding: 0 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+form>input {
+    font-size: 2em;
+    width: calc(100% - 12px);
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline-color: deeppink;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+button.doit {
+    font-size: 3em;
+    align-self: center;
+}
+
+div.error {
+    color: deeppink;
+    height: auto;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: all .3s;
+}
+.fade-enter, .fade-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
+.copy-stage {
+    position: absolute;
+    left: -9999999px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 96%;
+}
+
+@media screen and (min-width: 800px) {
+    footer {
+        width: 70%;
+    }
+}
+
+footer>a {
+    float: right;
+}

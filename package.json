@@ -1,0 +1,17 @@
+{
+  "name": "12liga",
+  "version": "1.0.0",
+  "description": "url shortener",
+  "main": "server.js",
+  "scripts": {
+    "run": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "rsync -azh --delete --progress -e 'ssh -p 2222' --exclude=node_modules --exclude=db.json ./* deploy@v.rodrigolop.es:/var/www/12li.ga/; ssh -p 2222 deploy@v.rodrigolop.es 'cd /var/www/12li.ga; npm install --production'; ssh -p 2222 root@v.rodrigolop.es 'service 12liga restart'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "log-timestamp": "^0.3.0"
+  }
+}

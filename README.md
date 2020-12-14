@@ -12,4 +12,5 @@ My very own url shortnner.
 
 ### Roadmap
 
+* Register registrant origin ip and browser
 * Allow to change previously created custom name

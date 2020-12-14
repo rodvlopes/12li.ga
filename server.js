@@ -3,7 +3,10 @@ const express = require('express')
 const app = express()
 const port = 3005
 const fs = require('fs')
-const DB_FILE = './db.json'
+const DB_FILE = process.env.DB_FILE || './db.json'
+const DEBOUNCE_TIME = 2000
+
+console.log('Using DB_FILE', DB_FILE)
 
 const HTTP_MOVED = 301
 const HTTP_FOUND = 302
@@ -36,7 +39,7 @@ function persistDbDebounced() {
   if (debounceTimer) {
     clearTimeout(debounceTimer)
   }
-  debounceTimer = setTimeout(() => persistDb(), 2000)
+  debounceTimer = setTimeout(() => persistDb(), DEBOUNCE_TIME)
 }
 
 app.get('/register/:name', (req, res) => {
@@ -73,10 +76,24 @@ app.get('/:other', (req, res) => {
     res.redirect(HTTP_MOVED, destination)
   }
   else {
-    res.status(NOT_FOUND).send('Not found')
+    res.status(HTTP_NOT_FOUND).send('Not found')
   }
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+
+
+if (!module.parent) {
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+  })
+}
+
+module.exports = {
+  server: app,
+  DEBOUNCE_TIME,
+  DB_FILE,
+  cleanCache: () => {
+    cache = {}
+    fs.writeFileSync(DB_FILE, '{}')
+  }
+}; // for testing purspose

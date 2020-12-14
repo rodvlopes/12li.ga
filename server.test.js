@@ -48,6 +48,7 @@ describe('12li.ga Server', () => {
   it('/POST should persist cache after debounce time', (done) => {
     chai.request(server)
       .post('/register/check-debounce')
+      .set('x-forwarded-for', '99.10.0.1')
       .query({ link: 'http://example.com' })
       .end((err, res) => {
         res.should.have.status(200);
@@ -57,7 +58,7 @@ describe('12li.ga Server', () => {
 
     setTimeout(() => {
       const cacheContent = fs.readFileSync(DB_FILE, { encoding: 'utf8' })
-      cacheContent.should.be.eq('{"check-debounce":"http://example.com"}')
+      cacheContent.should.be.eq('{"check-debounce":{"link":"http://example.com","userIp":"99.10.0.1","userAgent":"node-superagent/3.8.3"}}')
       done();
     }, DEBOUNCE_TIME + 100); //+ same_delay
   });

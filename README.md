@@ -12,5 +12,8 @@ My very own url shortnner.
 
 ### Roadmap
 
-* Register registrant origin ip and browser
-* Allow to change previously created custom name
+* [x] Register registrant origin ip and browser
+* [x] Add server tests suite 
+* [ ] Add client tests suite 
+* [ ] Force lowercase name when looking for a link name
+* [ ] Allow to change previously created custom name

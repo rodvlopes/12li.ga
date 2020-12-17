@@ -43,13 +43,13 @@ function persistDbDebounced() {
 }
 
 app.get('/register/:name', (req, res) => {
-  const { name } = req.params
+  const name = (req.params.name || '').toLowerCase()
   const link = cache[name] ? cache[name].link : ''
   res.status(link ? HTTP_FOUND : HTTP_NOT_FOUND).send(link)
 })
 
 app.post('/register/:name', (req, res) => {
-  const { name } = req.params
+  const name = (req.params.name || '').toLowerCase()
   const { link } = req.query
   const userIp = req.headers['x-forwarded-for']
   const userAgent = req.get('User-Agent')
@@ -71,10 +71,10 @@ app.get('/all', (req, res) => {
 
 app.use(express.static('public'));
 
-app.get('/:other', (req, res) => {
-  const { other } = req.params
-  const destination = cache[other]
-  console.log(`301 ${other} -> ${destination}`)
+app.get('/:name', (req, res) => {
+  const name = (req.params.name || '').toLowerCase()
+  const destination = cache[name]
+  console.log(`301 ${name} -> ${destination}`)
   if (destination) {
     res.redirect(HTTP_MOVED, destination.link)
   }

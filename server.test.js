@@ -72,4 +72,52 @@ describe('12li.ga Server', () => {
     }, DEBOUNCE_TIME + 100); //+ same_delay
   });
 
+
+  describe('lowercase only', () => {
+    beforeEach((done) => {
+      chai.request(server)
+        .post('/register/coolname')
+        .query({ link: 'http://example.com' })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.text.should.be.eq('http://example.com');
+          done();
+        });
+    });
+
+    it('GET /:name should redirect when querying uppercase', (done) => {
+      chai.request(server)
+        .get('/COOLNAME')
+        .end((err, res) => {
+          res.should.redirectTo('http://example.com/');
+          done();
+        });
+    });
+
+    it('GET /register/:name should ok when querying uppercase', (done) => {
+      chai.request(server)
+        .get('/register/COOLNAME')
+        .end((err, res) => {
+          res.should.have.status(302);
+          done();
+        });
+    });
+
+    it('GET /register/:name should not update when posting uppercase', (done) => {
+      chai.request(server)
+        .post('/register/COOLNAME')
+        .query({ link: 'http://aloha.com' })
+        .end((err, res) => {
+          res.should.have.status(302);
+        });
+
+        chai.request(server)
+          .get('/coolname')
+          .end((err, res) => {
+            res.should.redirectTo('http://example.com/');
+            done();
+          });
+    });
+  });
+
 });

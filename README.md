@@ -12,8 +12,12 @@ My very own url shortnner.
 
 ### Roadmap
 
+* [ ] Count url accesses
+* [ ] Admin interface
+  * [ ] Tabular view
+  * [ ] Delete record
+* [ ] Add client tests suite 
+* [ ] Allow to change previously created custom name
+* [x] Force lowercase name when looking for a link name
 * [x] Register registrant origin ip and browser
 * [x] Add server tests suite 
-* [ ] Add client tests suite 
-* [ ] Force lowercase name when looking for a link name
-* [ ] Allow to change previously created custom name

@@ -44,8 +44,8 @@ function persistDbDebounced() {
 
 app.get('/register/:name', (req, res) => {
   const { name } = req.params
-  console.log('isregistered', name)
-  res.status(cache[name] ? HTTP_FOUND : HTTP_NOT_FOUND).send(cache[name].link)
+  const link = cache[name] ? cache[name].link : ''
+  res.status(link ? HTTP_FOUND : HTTP_NOT_FOUND).send(link)
 })
 
 app.post('/register/:name', (req, res) => {

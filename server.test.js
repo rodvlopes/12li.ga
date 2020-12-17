@@ -12,7 +12,16 @@ describe('12li.ga Server', () => {
     done()
   });
 
-  it('/GET not registered route should 404', (done) => {
+  it('GET /register/:name not registered route should 404', (done) => {
+    chai.request(server)
+      .get('/register/no-name')
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+  });
+
+  it('GET /:name not registered route should 404', (done) => {
     chai.request(server)
       .get('/no-name')
       .end((err, res) => {
@@ -21,7 +30,7 @@ describe('12li.ga Server', () => {
       });
   });
 
-  it('/POST a single link by its name (not twice)', (done) => {
+  it('POST /register/:name should register but not twice', (done) => {
     chai.request(server)
       .post('/register/coolname')
       .query({ link: 'http://example.com' })
@@ -45,7 +54,7 @@ describe('12li.ga Server', () => {
       });
   });
 
-  it('/POST should persist cache after debounce time', (done) => {
+  it('POST /register/:name should persist cache after debounce time', (done) => {
     chai.request(server)
       .post('/register/check-debounce')
       .set('x-forwarded-for', '99.10.0.1')

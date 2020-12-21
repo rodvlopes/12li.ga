@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/slugify@1.4.6/slugify.min.js"></script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <h1>
             <i>12</i>li.ga<b v-if="link">/</b><span v-if="link">{{linkSlug}}</span>
             <transition name="fade">

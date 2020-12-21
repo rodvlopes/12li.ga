@@ -12,13 +12,14 @@ My very own url shortnner.
 
 ### Roadmap
 
-* [ ] Bugfix: prevent flicker on startup
 * [ ] Count url accesses
 * [ ] Admin interface
   * [ ] Tabular view
   * [ ] Delete record
 * [ ] Add client tests suite 
 * [ ] Allow to change previously created custom name
+* [ ] Backup data before deploy
+* [x] Bugfix: prevent flicker on startup
 * [x] Darkmode
 * [x] Force lowercase name when looking for a link name
 * [x] Register registrant origin ip and browser

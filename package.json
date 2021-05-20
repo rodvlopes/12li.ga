@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "DB_FILE=/tmp/12liga.test.db mocha *.test.js --exit -t 3000",
     "test:watch": "DB_FILE=/tmp/12liga.test.db mocha *.test.js --env --watch -t 3000",
-    "deploy": "rsync -azh --delete --progress -e 'ssh -p 2222' --exclude=node_modules --exclude=db.json ./* deploy@v.rodrigolop.es:/var/www/12li.ga/; ssh -p 2222 deploy@v.rodrigolop.es 'cd /var/www/12li.ga; npm install --production'; ssh -p 2222 root@v.rodrigolop.es 'service 12liga restart'"
+    "deploy": "rsync -azh --delete --progress -e 'ssh -p 2223' --exclude=node_modules --exclude=db.json ./* root@florida.rodrigolop.es:/var/www/12li.ga/; ssh -p 2223 root@florida.rodrigolop.es 'cd /var/www/12li.ga; ./build-container.sh; docker restart 12liga'"
   },
   "author": "",
   "license": "ISC",
